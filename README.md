@@ -26,3 +26,7 @@ The application data can be found in `~/.var/app/com.bay12games.DwarfFortress/df
 - Install dfhack
 	- Add an option to boot dfhack or not
 - Improve install steps, don't compile useless parts
+- Perhaps work the Dwarf Fortress folders into a more XDG-ish state
+  (~/data, ~/cache, ~/config, etc)
+- Make a proper readme
+- Look into possibly packaging and publishing the package somewhere, depending on what bay12games thinks
