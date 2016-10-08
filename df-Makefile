@@ -15,7 +15,7 @@ LDFLAGS := $(shell $(PKG_CONFIG) --libs $(RLIBS))
 
 LIBGRAPHICS = libs/libgraphics.so
 
-INSTALL_PATH = /app/dwarf-fortress/
+INSTALL_PATH = /app/dwarf-fortress
 DF_APPLICATION = /app/bin/dwarf-fortress
 DF_DESKTOP = /app/share/applications/com.bay12games.DwarfFortress.desktop
 DF_ICON = /app/share/icons/hicolor/256x256/apps/com.bay12games.DwarfFortress.png
@@ -25,7 +25,7 @@ define DWARFFORTRESS_APP :=
 
 cd ~/df_linux
 
-DIRS=(i data raw sdl )
+DIRS=( data raw sdl )
 FILES=( *.txt README.linux )
 
 for DIR in "$${DIRS[@]}"; do
@@ -33,7 +33,7 @@ for DIR in "$${DIRS[@]}"; do
 done
 for PATTERN in "$${FILES[@]}"; do
 	for FILE in $(INSTALL_PATH)/$$PATTERN; do
-		[ ! -f "$$FILE" ] && cp -r "$(INSTALL_PATH)/$$FILE" .
+		[ ! -f "$$(basename $$FILE)" ] && cp -r "$$FILE" .
 	done
 done
 
