@@ -1,0 +1,78 @@
+SKIP_BUILD = g_src/find_files.cpp g_src/ g_src/music_and_sound.cpp \
+			 g_src/music_and_sound_fmodex.cpp g_src/renderer_curses.cpp
+
+G_SRCS := $(filter-out $(SKIP_BUILD),$(wildcard g_src/*.cpp))
+G_OBJS := $(G_SRCS:.cpp=.o)
+
+CXX ?= g++
+PKG_CONFIG ?= pkg-config
+
+LIBS := ncursesw openal sndfile
+RLIBS := glew glu gtk+-2.0 sdl SDL_image SDL_ttf zlib
+CXXFLAGS ?= -O2 -pipe -Wall -Wextra
+CXXFLAGS += $(shell $(PKG_CONFIG) --cflags $(LIBS) $(RLIBS)) -Dunix -Dlinux -fPIC -std=c++11 -D_GLIBCXX_USE_CXX11_ABI=0
+LDFLAGS := $(shell $(PKG_CONFIG) --libs $(RLIBS))
+
+LIBGRAPHICS = libs/libgraphics.so
+
+INSTALL_PATH = /app/dwarf-fortress/
+DF_APPLICATION = /app/bin/dwarf-fortress
+DF_DESKTOP = /app/share/applications/com.bay12games.DwarfFortress.desktop
+DF_ICON = /app/share/icons/hicolor/256x256/apps/com.bay12games.DwarfFortress.png
+
+define DWARFFORTRESS_APP :=
+#!/bin/sh
+
+cd ~/df_linux
+
+DIRS=(i data raw sdl )
+FILES=( *.txt README.linux )
+
+for DIR in "$${DIRS[@]}"; do
+	[ ! -d "$$DIR" ] && cp -r "$(INSTALL_PATH)/$$DIR" .
+done
+for PATTERN in "$${FILES[@]}"; do
+	for FILE in $(INSTALL_PATH)/$$PATTERN; do
+		[ ! -f "$$FILE" ] && cp -r "$(INSTALL_PATH)/$$FILE" .
+	done
+done
+
+$(INSTALL_PATH)/libs/Dwarf_Fortress
+endef
+
+all: $(LIBGRAPHICS)
+
+$(LIBGRAPHICS): $(G_OBJS)
+	$(CXX) -shared $(CXXFLAGS) $(LDFLAGS) $(G_OBJS) -o $@
+
+%.o: %.cpp
+	$(CXX) $(CXXFLAGS) -c $< -o $@
+
+$(INSTALL_PATH):
+	mkdir -p $(@D)
+	cp -r . $(@D)
+	$(RM) $(@D)/com.bay12games.DwarfFortress.*
+
+$(DF_APPLICATION):
+	mkdir -p $(@D)
+	$(file > $(@),$(DWARFFORTRESS_APP))
+	chmod +x $(@)
+
+$(DF_DESKTOP):
+	mkdir -p $(@D)
+	cp $(@F) $@	
+
+$(DF_ICON):
+	mkdir -p $(@D)
+	cp $(@F) $@	
+
+pre-install:
+	$(RM) -r g_src/
+	$(RM) Makefile
+
+install: $(LIBGRAPHICS) pre-install $(INSTALL_PATH) $(DF_APPLICATION) $(DF_DESKTOP) $(DF_ICON)
+
+clean:
+	$(RM) $(LIBGRAPHICS) $(G_OBJS)
+
+.PHONY: all install pre-install

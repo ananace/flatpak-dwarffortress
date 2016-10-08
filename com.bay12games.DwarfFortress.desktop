@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Application
+Name=Dwarf Fortress
+Icon=com.bay12games.DwarfFortress
+Exec=dwarf-fortress
+Categories=Game;
+StartupWMClass=DwarfFortress
