@@ -6,7 +6,7 @@ This repo contains the data necessary to compile Dwarf Fortress into a Flatpak.
 To build it you need the freedesktop platform and SDK, which can be installed in the following manner;
 ```
 $ wget https://sdk.gnome.org/keys/gnome-sdk.gpg
-$ flatpak --user remote-add --gpg-import=gnome-sdk.gpggnome http://sdk.gnome.org/repo
+$ flatpak --user remote-add --gpg-import=gnome-sdk.gpg gnome http://sdk.gnome.org/repo
 $ flatpak --user install gnome org.freedesktop.Sdk 1.4
 $ flatpak --user install gnome org.freedesktop.Platform 1.4
 ```
