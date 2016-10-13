@@ -3,7 +3,7 @@
 	"runtime": "org.gnome.Platform",
 	"runtime-version": "3.22",
 	"sdk": "org.gnome.Sdk",
-	"command": "dwarf-fortress",
+	"command": "dwarf-fortress.bin",
 	"finish-args": [
 		"--persist=df_linux",
 		"--share=ipc", "--socket=x11", "--device=dri",
@@ -54,6 +54,11 @@
 					"type": "file",
 					"path": "com.bay12games.DwarfFortress.png",
 					"dest-filename": "com.bay12games.DwarfFortress.png"
+				},
+				{
+					"type": "file",
+					"path": "dwarf-fortress.bin",
+					"dest-filename": "dwarf-fortress.bin"
 				},
 				{
 					"type": "file",

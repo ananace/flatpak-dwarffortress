@@ -1,0 +1,71 @@
+#!/bin/bash
+
+cd ~/df_linux || exit 1
+
+DFHACK=""
+
+usage() {
+	cat <<EOF
+Usage: $0 [OPTION...]
+
+Application data can be found in ~/.var/app/com.bay12games.DwarfFortress/df_linux/
+
+If a dfhack init file has been created, then the default is to run dfhack.
+
+Options:
+ -d   Runs plain Dwarf Fortress
+ -h   Runs dfhack
+ -H   Runs dfhack, creating an init file if one doesn't already exist
+ -R   Copies raw files into the application data folder, for editing
+EOF
+}
+
+while getopts ":hHdR" opt; do
+	case $opt in
+		h)
+			DFHACK="true"
+			;;
+		H)
+			DFHACK="true"
+			! [ -f dfhack.init ] && cp dfhack.init-example dfhack.init
+			;;
+		d)
+			DFHACK="false"
+			;;
+		R)
+			RAW="true"
+			;;
+		\?)
+			echo "Unknown option -$OPTARG"
+			usage
+			exit 0
+			;;
+	esac
+	shift
+done
+
+if [ ! -f /app/dwarf-fortress/dfhack ]; then
+	[ "$DFHACK" = "true" ] && ( echo "This version of com.bay12games.DwarfFortress does not have dfhack support. Sorry."; exit 1; )
+	DFHACK="false"
+fi
+
+DIRS=( data sdl )
+FILES=( dfhack.init-example *.txt README.linux )
+
+[ "$DFHACK" = "true" ] && DIRS+=( hack )
+[ "$RAW" = "true" ] && DIRS+=( raw )
+
+for DIR in "${DIRS[@]}"; do
+	cp -nr "/app/dwarf-fortress/$DIR" .
+done
+for PATTERN in "${FILES[@]}"; do
+	for FILE in /app/dwarf-fortress/$PATTERN; do
+		cp -n "$FILE" .
+	done
+done
+
+if [ "$DFHACK" = "true" ] || [ -f ~/data/dfhack.init ] && [ "$DFHACK" != "false" ]; then
+	/app/dwarf-fortress/dfhack "$@"
+else
+	/app/dwarf-fortress/libs/Dwarf_Fortress "$@"
+fi

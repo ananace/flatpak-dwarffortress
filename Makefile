@@ -25,7 +25,7 @@ run:
 	flatpak run $(ID)
 
 clean-build:
-	$(RM) $(BUILD_DIR)
+	$(RM) -r $(BUILD_DIR)
 
 clean: clean-build
 	$(RM) $(BUNDLE)
