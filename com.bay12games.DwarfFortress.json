@@ -1,5 +1,6 @@
 {
 	"app-id": "com.bay12games.DwarfFortress",
+	"branch": "0.43.03",
 	"runtime": "org.gnome.Platform",
 	"runtime-version": "3.22",
 	"sdk": "org.gnome.Sdk",
@@ -36,7 +37,7 @@
 			"sources": [
 				{
 					"type": "archive",
-					"url": "http://bay12games.com/dwarves/df_43_05_linux.tar.bz2",
+					"url": "http://bay12games.com/dwarves/df_43_03_linux.tar.bz2",
 					"sha256": "856c13170e8beefb5419ae71ee26c85db9716b3ebd4c7348aa44b896bd490be4"
 				},
 				{
@@ -63,6 +64,23 @@
 				{
 					"type": "file",
 					"path": "df-Makefile",
+					"dest-filename": "Makefile"
+				}
+			]
+		},
+		{
+			"name": "dfhack",
+			"no-autogen": true,
+			"sources": [
+				{
+					"type": "archive",
+					"url": "https://github.com/DFHack/dfhack/releases/download/0.43.03-r1/dfhack-0.43.03-r1-Linux-gcc-4.8.1.tar.bz2",
+					"sha256": "7bcfe04c63687107432c4755873ac2da97e8ca3f3990392fb023cfd39f00cfb3",
+					"strip-components": 0
+				},
+				{
+					"type": "file",
+					"path": "hack-Makefile",
 					"dest-filename": "Makefile"
 				}
 			]

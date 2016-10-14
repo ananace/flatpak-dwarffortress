@@ -1,0 +1,14 @@
+INSTALL = /app/dwarf-fortress/dfhack
+
+all: 
+	true
+
+$(INSTALL):
+	mv -t $(@D) dfhack* hack/ stonesense/
+
+install: $(INSTALL_PATH)
+
+clean:
+	true
+
+.PHONY: all install clean
