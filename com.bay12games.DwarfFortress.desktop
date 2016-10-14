@@ -2,6 +2,6 @@
 Type=Application
 Name=Dwarf Fortress
 Icon=com.bay12games.DwarfFortress
-Exec=dwarf-fortress
+Exec=dwarf-fortress.bin
 Categories=Game;
 StartupWMClass=DwarfFortress

@@ -6,7 +6,7 @@ all:
 $(INSTALL):
 	mv -t $(@D) dfhack* hack/ stonesense/
 
-install: $(INSTALL_PATH)
+install: $(INSTALL)
 
 clean:
 	true
