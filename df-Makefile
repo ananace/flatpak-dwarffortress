@@ -9,7 +9,7 @@ PKG_CONFIG ?= pkg-config
 
 LIBS := ncursesw openal sndfile
 RLIBS := glew glu gtk+-2.0 sdl SDL_image SDL_ttf zlib
-CXXFLAGS ?= -O2 -pipe -Wall -Wextra
+CXXFLAGS ?= -O0 -pipe -Wall -Wextra
 CXXFLAGS += $(shell $(PKG_CONFIG) --cflags $(LIBS) $(RLIBS)) -Dunix -Dlinux -fPIC -std=c++11 -D_GLIBCXX_USE_CXX11_ABI=0
 LDFLAGS := $(shell $(PKG_CONFIG) --libs $(RLIBS))
 

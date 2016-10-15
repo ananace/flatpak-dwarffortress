@@ -30,6 +30,9 @@
 		{
 			"name": "dwarf-fortress",
 			"no-autogen": true,
+			"build-options": {
+				"no-debuginfo": true
+			},
 			"cleanup": [
 				"/share/man",
 				"/lib/debug"

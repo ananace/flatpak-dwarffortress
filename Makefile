@@ -7,7 +7,7 @@ REPO ?= repo
 
 MANIFEST = $(ID).json
 
-all: $(BUNDLE)
+all: build
 
 build:
 	flatpak-builder --arch=i386 --repo $(REPO) $(BUILD_DIR) $(MANIFEST)

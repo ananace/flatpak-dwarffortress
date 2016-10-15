@@ -4,7 +4,7 @@ all:
 	true
 
 $(INSTALL):
-	mv -t $(@D) dfhack* hack/ stonesense/
+	mv -t $(@D) dfhack.init-example dfhack-config/ hack/ stonesense/
 
 install: $(INSTALL)
 
