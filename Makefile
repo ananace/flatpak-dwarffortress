@@ -5,24 +5,27 @@ USER := --user
 BUILD_DIR ?= build
 REPO ?= repo
 
+ARCH ?= $(shell uname -m)
+BRANCH ?= 0.43.05
+
 MANIFEST = $(ID).json
 
 all: build
 
 build:
-	flatpak-builder --arch=i386 --repo $(REPO) $(BUILD_DIR) $(MANIFEST)
+	flatpak-builder --arch=$(ARCH) --repo $(REPO) $(BUILD_DIR) $(MANIFEST)
 
 $(BUNDLE): build
-	flatpak build-bundle --arch=i386 $(REPO) $(BUNDLE) $(ID) 0.43.03
+	flatpak build-bundle --arch=$(ARCH) $(REPO) $(BUNDLE) $(ID) $(BRANCH)
 
 install: $(BUNDLE)
-	flatpak $(USER) install --arch=i386 --bundle $(BUNDLE)
+	flatpak $(USER) install --arch=$(ARCH) --bundle $(BUNDLE)
 
 uninstall:
-	flatpak $(USER) uninstall --arch=i386 $(ID) 0.43.03
+	flatpak $(USER) uninstall --arch=$(ARCH) $(ID) $(BRANCH)
 
 run:
-	flatpak run --arch=i386 --branch=0.43.03 $(ID)
+	flatpak run --arch=$(ARCH) --branch=$(BRANCH) $(ID)
 
 clean-build:
 	$(RM) -r $(BUILD_DIR)
