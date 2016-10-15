@@ -53,6 +53,10 @@ APP=/app/dwarf-fortress
 DIRS=( data )
 FILES=( '*.txt' README.linux )
 
+if [ -f dfhack.init ] && [ "$DFHACK" != "false" ]; then
+	DFHACK="true"
+fi
+
 [ "$DFHACK" = "true" ] && DIRS+=( dfhack-config )
 #[ "$STONESENSE" = "true" ] && DIRS+=( stonesense )
 [ "$RAW" = "true" ] && DIRS+=( raw )

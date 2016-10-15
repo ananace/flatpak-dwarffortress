@@ -1,0 +1,17 @@
+{ 
+    "name": "dfhack",
+    "no-autogen": true,
+    "sources": [
+        {
+            "type": "archive",
+            "url": "https://github.com/DFHack/dfhack/releases/download/0.43.03-r1/dfhack-0.43.03-r1-Linux-gcc-4.8.1.tar.bz2",
+            "sha256": "7bcfe04c63687107432c4755873ac2da97e8ca3f3990392fb023cfd39f00cfb3",
+            "strip-components": 0
+        },
+        {
+            "type": "file",
+            "path": "dfhack/Makefile",
+            "dest-filename": "Makefile"
+        }
+    ]
+}

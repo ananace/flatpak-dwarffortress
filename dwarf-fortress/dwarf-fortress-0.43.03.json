@@ -1,0 +1,44 @@
+{
+    "name": "dwarf-fortress",
+    "no-autogen": true,
+    "build-options": {
+        "no-debuginfo": true
+    },
+    "cleanup": [
+        "/share/man",
+        "/lib/debug"
+    ],
+    "sources": [
+        {
+            "type": "archive",
+            "url": "http://bay12games.com/dwarves/df_43_03_linux.tar.bz2",
+            "sha256": "8725cb00188b4282fd5a3c4be10c3255f837b951ca48af90fa3a351e3a818337"
+    	},
+        {
+            "type": "shell",
+            "commands": [
+                "rm df libs/lib*.so*"
+            ]
+        },
+        {
+            "type": "file",
+            "path": "dwarf-fortress/com.bay12games.DwarfFortress.desktop",
+            "dest-filename": "com.bay12games.DwarfFortress.desktop"
+        },
+        {
+            "type": "file",
+            "path": "dwarf-fortress/com.bay12games.DwarfFortress.png",
+            "dest-filename": "com.bay12games.DwarfFortress.png"
+        },
+        {
+            "type": "file",
+            "path": "dwarf-fortress/dwarf-fortress.bin",
+            "dest-filename": "dwarf-fortress.bin"
+        },
+        {
+            "type": "file",
+            "path": "dwarf-fortress/Makefile",
+            "dest-filename": "Makefile"
+        }
+    ]
+}
