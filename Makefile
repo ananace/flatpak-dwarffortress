@@ -5,8 +5,8 @@ USER := --user
 BUILD_DIR ?= build
 REPO ?= repo
 
-ARCH ?= $(shell uname -m)
-BRANCH ?= 0.43.05
+ARCH := i386
+BRANCH ?= 0.43.03
 
 MANIFEST = $(ID).json
 

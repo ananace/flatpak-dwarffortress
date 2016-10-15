@@ -1,6 +1,6 @@
 {
 	"app-id": "com.bay12games.DwarfFortress",
-	"branch": "0.43.05",
+	"branch": "0.43.03",
 	"runtime": "org.gnome.Platform",
 	"runtime-version": "3.22",
 	"sdk": "org.gnome.Sdk",
@@ -28,7 +28,7 @@
 		"deps/openal-1.17.2.json",
 		"deps/ncurses-6.0.json",
 
-		"dwarf-fortress/dwarf-fortress-0.43.05.json",
-		"dwarf-fortress/dwarf-fortress-32-0.43.05.json"
+		"dwarf-fortress/dwarf-fortress-0.43.03.json",
+		"dfhack/dfhack-0.43.03-r1.json"
 	]
 }
