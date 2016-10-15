@@ -4,6 +4,11 @@
     "build-options": {
         "no-debuginfo": true
     },
+    "arch": {
+        "x86_64": {
+            "disabled": true
+        }
+    },
     "cleanup": [
         "/share/man",
         "/lib/debug"
