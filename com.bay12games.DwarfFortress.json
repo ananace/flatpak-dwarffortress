@@ -2,7 +2,7 @@
 	"app-id": "com.bay12games.DwarfFortress",
 	"branch": "0.43.05",
 	"runtime": "org.gnome.Platform",
-	"runtime-version": "3.22",
+	"runtime-version": "3.24",
 	"sdk": "org.gnome.Sdk",
 	"command": "dwarf-fortress.bin",
 	"finish-args": [
@@ -29,6 +29,8 @@
 		"deps/ncurses-6.0.json",
 
 		"dwarf-fortress/dwarf-fortress-0.43.05.json",
-		"dwarf-fortress/dwarf-fortress-32-0.43.05.json"
+		"dwarf-fortress/dwarf-fortress-32-0.43.05.json",
+		"dfhack/dfhack-0.43.05-beta2.json",
+		"dfhack/dfhack-32-0.43.05-beta2.json"
 	]
 }

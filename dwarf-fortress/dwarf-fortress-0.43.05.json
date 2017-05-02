@@ -27,22 +27,22 @@
         },
         {
             "type": "file",
-            "path": "dwarf-fortress/com.bay12games.DwarfFortress.desktop",
+            "path": "com.bay12games.DwarfFortress.desktop",
             "dest-filename": "com.bay12games.DwarfFortress.desktop"
         },
         {
             "type": "file",
-            "path": "dwarf-fortress/com.bay12games.DwarfFortress.png",
+            "path": "com.bay12games.DwarfFortress.png",
             "dest-filename": "com.bay12games.DwarfFortress.png"
         },
         {
             "type": "file",
-            "path": "dwarf-fortress/dwarf-fortress.bin",
+            "path": "dwarf-fortress.bin",
             "dest-filename": "dwarf-fortress.bin"
         },
         {
             "type": "file",
-            "path": "dwarf-fortress/Makefile",
+            "path": "Makefile",
             "dest-filename": "Makefile"
         }
     ]

@@ -8,7 +8,7 @@
         },
 		{
 			"type": "patch",
-			"path": "deps/libsdl-const-xdata32.patch"
+			"path": "libsdl-const-xdata32.patch"
 		},
 		{
 			"type": "shell",

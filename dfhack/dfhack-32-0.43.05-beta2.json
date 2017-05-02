@@ -1,5 +1,5 @@
 {
-    "name": "dfhack",
+    "name": "dfhack-32",
     "no-autogen": true,
     "arch": {
         "x86_64": {
@@ -9,8 +9,8 @@
     "sources": [
         {
             "type": "archive",
-            "url": "https://github.com/DFHack/dfhack/releases/download/0.43.03-r1/dfhack-0.43.03-r1-Linux-gcc-4.8.1.tar.bz2",
-            "sha256": "7bcfe04c63687107432c4755873ac2da97e8ca3f3990392fb023cfd39f00cfb3",
+            "url": "https://github.com/DFHack/dfhack/releases/download/0.43.05-beta2/dfhack-0.43.05-beta2-Linux-32-gcc-4.8.1.tar.bz2",
+            "sha256": "2e404b67e5c914b7513e942870ff5f3744d147440ae7bc7687c3d97a8c81c7ca",
             "strip-components": 0
         },
         {

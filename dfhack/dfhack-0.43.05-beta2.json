@@ -1,0 +1,17 @@
+{
+    "name": "dfhack",
+    "no-autogen": true,
+    "sources": [
+        {
+            "type": "archive",
+            "url": "https://github.com/DFHack/dfhack/releases/download/0.43.05-beta2/dfhack-0.43.05-beta2-Linux-64-gcc-4.8.1.tar.bz2",
+            "sha256": "2477843cf31e3b5052b842fb800fd56fae189d4a475b9c6ae7ff6b01e2e8ef76",
+            "strip-components": 0
+        },
+        {
+            "type": "file",
+            "path": "Makefile",
+            "dest-filename": "Makefile"
+        }
+    ]
+}
