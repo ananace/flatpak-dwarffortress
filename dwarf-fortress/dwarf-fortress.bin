@@ -38,7 +38,7 @@ while getopts ":hsdR" opt; do
 		\?)
 			echo "Unknown option -$OPTARG"
 			usage
-			exit 0
+			exit 1
 			;;
 	esac
 	shift
