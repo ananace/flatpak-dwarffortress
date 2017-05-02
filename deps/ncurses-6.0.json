@@ -10,7 +10,6 @@
     ],
     "cleanup": [
         "/bin/*",
-        "/include",
         "/lib/*.a",
         "/lib/*.la"
     ],

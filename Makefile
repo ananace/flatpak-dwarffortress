@@ -10,9 +10,29 @@ BRANCH ?= 0.43.05
 
 MANIFEST = $(ID).json
 
+# TODO: Make a generator script for this instead of having a messy makefile
+ifeq ($(BRANCH),0.43.05)
+ifeq ($(ARCH),x86_64)
+	EXTRA_DATA = 856c13170e8beefb5419ae71ee26c85db9716b3ebd4c7348aa44b896bd490be4:11580594::http://bay12games.com/dwarves/df_43_05_linux.tar.bz2
+else
+	EXTRA_DATA = 0334e6b35ecc36949f5c60ffc1eb46fade3365b55a44f2e11fd4ae799ba7819a:12158550::http://bay12games.com/dwarves/df_43_05_linux32.tar.bz2
+endif
+else ifeq ($(BRANCH),0.43.03)
+ifeq ($(ARCH),i386)
+	EXTRA_DATA = 8725cb00188b4282fd5a3c4be10c3255f837b951ca48af90fa3a351e3a818337:13970214::http://bay12games.com/dwarves/df_43_03_linux.tar.bz2
+else
+	$(error Dwarf Fortress 0.43.03 and earlier only support 32-bit environments)
+endif
+else
+	$(error Only Dwarf Fortress 0.43.03 and 0.43.05 can be built at the moment)
+endif
+
 all: build
 
-build: deps
+$(MANIFEST): $(MANIFEST).in
+	sed -e 's/@BRANCH@/$(BRANCH)/' -e 's|@EXTRA_DATA@|$(EXTRA_DATA)|' $< > $@
+
+build: deps $(MANIFEST)
 	flatpak-builder --force-clean --arch=$(ARCH) --repo=$(REPO) --ccache --require-changes $(BUILD_DIR) $(MANIFEST)
 	flatpak build-update-repo $(REPO)
 
@@ -42,4 +62,4 @@ clean:
 	$(RM) -r $(BUILD_DIR)
 	$(RM) $(BUNDLE)
 
-.PHONY: all build bundle clean clean-build deps
+.PHONY: all build bundle clean clean-build deps $(MANIFEST)

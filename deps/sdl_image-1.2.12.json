@@ -1,5 +1,9 @@
 {
     "name": "sdl_image",
+    "cleanup": [
+        "/lib/*.la",
+        "/lib/*.a"
+    ],
     "sources": [
         {
             "type": "archive",

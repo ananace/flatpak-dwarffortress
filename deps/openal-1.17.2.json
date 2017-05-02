@@ -7,6 +7,10 @@
         "-DALSOFT_EXAMPLES:BOOL=OFF",
         "-DALSOFT_TESTS:BOOL=OFF"
     ],
+    "cleanup": [
+        "/lib/*.a",
+        "/lib/*.la"
+    ],
     "sources": [
         {
             "type": "archive",

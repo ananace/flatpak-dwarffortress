@@ -44,24 +44,28 @@ while getopts ":hsdR" opt; do
     shift
 done
 
-if [ ! -d /app/extra/hack ]; then
+if [ ! -d /app/dfhack ]; then
     [ "$DFHACK" = "true" ] && ( echo "This version of com.bay12games.DwarfFortress does not come with dfhack support. Sorry."; exit 1; )
     DFHACK="false"
 fi
 
 DIRS=( data )
+HACKDIRS=( )
 FILES=( '*.txt' README.linux )
 
 if [ -f dfhack.init ] && [ "$DFHACK" != "false" ]; then
     DFHACK="true"
 fi
 
-[ "$DFHACK" = "true" ] && DIRS+=( hack dfhack-config )
-[ "$STONESENSE" = "true" ] && DIRS+=( stonesense )
+[ "$DFHACK" = "true" ] && HACKDIRS+=( hack dfhack-config )
+[ "$STONESENSE" = "true" ] && HACKDIRS+=( stonesense )
 [ "$RAW" = "true" ] && DIRS+=( raw )
 
 for DIR in "${DIRS[@]}"; do
     cp -nr "/app/extra/$DIR" .
+done
+for DIR in "${HACKDIRS[@]}"; do
+    cp -nr "/app/dfhack/$DIR" .
 done
 for PATTERN in "${FILES[@]}"; do
     for FILE in /app/extra/$PATTERN; do
@@ -71,7 +75,7 @@ done
 
 if [ "$DFHACK" = "true" ] && [ ! -f dfhack.init ]; then
     echo "Creating dfhack.init"
-    cp /app/extra/dfhack.init-example dfhack.init
+    cp /app/dfhack/dfhack.init-example dfhack.init
 fi
 
 if [ "$DFHACK" = "true" ] || [ -f dfhack.init ] && [ "$DFHACK" != "false" ]; then
@@ -80,8 +84,8 @@ if [ "$DFHACK" = "true" ] || [ -f dfhack.init ] && [ "$DFHACK" != "false" ]; the
         . "$HOME/$RC"
     fi
 
-    export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/app/extra/hack/libs:/app/extra/hack"
-    export LD_PRELOAD="${PRELOAD_LIB:+/app/$PRELOAD_LIB:}/app/extra/hack/libdfhack.so"
+    export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/app/dfhack/hack/libs:/app/dfhack/hack"
+    export LD_PRELOAD="${PRELOAD_LIB:+/app/$PRELOAD_LIB:}/app/dfhack/hack/libdfhack.so"
 fi
 
 /app/extra/libs/Dwarf_Fortress "$@"

@@ -1,6 +1,6 @@
 {
     "app-id": "com.bay12games.DwarfFortress",
-    "branch": "0.43.05",
+    "branch": "@BRANCH@",
     "runtime": "org.gnome.Platform",
     "runtime-version": "3.24",
     "sdk": "org.gnome.Sdk",
@@ -10,7 +10,7 @@
         "--share=ipc", "--socket=x11", "--device=dri",
         "--socket=pulseaudio",
 
-        "--extra-data=df_linux.tar.bz2:856c13170e8beefb5419ae71ee26c85db9716b3ebd4c7348aa44b896bd490be4:11580594::http://bay12games.com/dwarves/df_43_05_linux.tar.bz2"
+        "--extra-data=df_linux.tar.bz2:@EXTRA_DATA@"
     ],
     "cleanup": [
         "/include",
@@ -30,8 +30,8 @@
         "deps/openal-1.17.2.json",
         "deps/ncurses-6.0.json",
 
-        "libgraphics/libgraphics-0.43.05.json",
-        "dfhack/dfhack-0.43.05.json",
+        "libgraphics/libgraphics-@BRANCH@.json",
+        "dfhack/dfhack-@BRANCH@.json",
 
         {
             "name": "dwarf-fortress",

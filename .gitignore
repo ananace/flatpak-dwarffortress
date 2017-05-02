@@ -3,3 +3,4 @@ repo/
 .flatpak-builder/
 *.flatpak
 *.tar.*
+com.bay12games.DwarfFortress.json

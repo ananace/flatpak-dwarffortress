@@ -11,6 +11,10 @@
         "GLEW_DEST=/app",
         "LIBDIR=/app/lib"
     ],
+    "cleanup": [
+        "/include",
+        "/lib/pkgconfig"
+    ],
     "sources": [
         {
             "type": "archive",
@@ -21,9 +25,5 @@
             "type": "patch",
             "path": "glew-no-static-lib.patch"
         }
-    ],
-    "cleanup": [
-        "/include",
-        "/lib/pkgconfig"
     ]
 }

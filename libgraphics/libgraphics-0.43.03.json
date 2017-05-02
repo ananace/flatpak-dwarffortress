@@ -10,7 +10,7 @@
         },
         {
             "type": "file",
-            "path": "dwarf-fortress/Makefile",
+            "path": "Makefile",
             "dest-filename": "Makefile"
         }
     ]

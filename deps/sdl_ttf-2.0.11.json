@@ -1,5 +1,9 @@
 {
     "name": "sdl_ttf",
+    "cleanup": [
+        "/lib/*.a",
+        "/lib/*.la"
+    ],
     "sources": [
         {
             "type": "archive",

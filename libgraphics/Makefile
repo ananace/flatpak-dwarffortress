@@ -1,4 +1,4 @@
-SKIP_BUILD = g_src/find_files.cpp g_src/ g_src/music_and_sound.cpp \
+SKIP_BUILD = g_src/find_files.cpp g_src/music_and_sound.cpp \
              g_src/music_and_sound_fmodex.cpp g_src/renderer_curses.cpp \
              g_src/tetris.cpp
 
@@ -11,7 +11,7 @@ PKG_CONFIG ?= pkg-config
 
 LIBS := ncursesw openal sndfile
 RLIBS := glew glu gtk+-2.0 sdl SDL_image SDL_ttf zlib
-CXXFLAGS ?= -O2 -pipe -Wall -Wextra
+CXXFLAGS ?= -O0 -pipe -Wall -Wextra
 CXXFLAGS += $(shell $(PKG_CONFIG) --cflags $(LIBS) $(RLIBS)) -Dunix -Dlinux -fPIC -std=c++11 -D_GLIBCXX_USE_CXX11_ABI=0
 LDFLAGS := $(shell $(PKG_CONFIG) --libs $(RLIBS))
 
@@ -26,7 +26,4 @@ libgraphics.so: $(G_OBJS)
 install:
 	install -m 0644 libgraphics.so $(PREFIX)/lib
 
-clean:
-	$(RM) $(LIBGRAPHICS) $(G_OBJS)
-
-.PHONY: all clean install
+.PHONY: all install
