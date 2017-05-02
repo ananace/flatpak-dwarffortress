@@ -1,11 +1,7 @@
 {
     "name": "dfhack",
     "no-autogen": true,
-    "arch": {
-        "i386": {
-            "disabled": true
-        }
-    },
+    "only-arches": [ "x86_64" ],
     "sources": [
         {
             "type": "archive",
