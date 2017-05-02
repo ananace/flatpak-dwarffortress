@@ -22,7 +22,8 @@
         {
             "type": "shell",
             "commands": [
-                "rm df libs/lib*.so*"
+                "rm df libs/lib*.so*",
+                "sed -e 's/\\(#include <iostream>\\)/\\1\\n#include <cmath>/' -i g_src/ttf_manager.cpp"
             ]
         },
         {
