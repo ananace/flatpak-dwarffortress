@@ -24,4 +24,9 @@ The application data when run can be found in `~/.var/app/com.bay12games.DwarfFo
 - Improve install steps, strip down configure parameters to just what's needed
 - Perhaps work the Dwarf Fortress folders into a more XDG-ish state
   (~/data, ~/cache, ~/config, etc)
+  - Could probably generate a temporary file hierarchy with symlinks in /tmp on run.
+  - Look into modding, make sure it's not going to break anything because of these changes.
+    - Could probably do it as a two-step solution, the 'copy everything' one, and the XDG way.
 - Make a proper readme
+- Split DFHack out as an extension, to avoid rebuilding the entire application on DFHack updates.
+  Would also let people use different versions to avoid bugs or glitches.
