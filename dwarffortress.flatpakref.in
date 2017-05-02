@@ -1,0 +1,10 @@
+[Flatpak Ref]
+Title=Dwarf Fortress
+Name=com.bay12games.DwarfFortress
+Branch=0.43.05
+Url=@URL@
+IsRuntime=False
+GPGKey=@GPG@
+RuntimeRepo=https://sdk.gnome.org/gnome.flatpakrepo
+Comment=Dwarf Fortress
+Description=A single-player fantasy game about dwarves.

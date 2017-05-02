@@ -1,6 +1,8 @@
 build/
 repo/
+repo-release/
 .flatpak-builder/
 *.flatpak
 *.tar.*
 com.bay12games.DwarfFortress.json
+dwarffortress.flatpakref

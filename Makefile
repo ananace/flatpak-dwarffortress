@@ -2,6 +2,7 @@ override BUNDLE   := dwarffortress.flatpak
 override ID       := com.bay12games.DwarfFortress
 override MANIFEST := $(ID).json
 override USER     := --user
+override REL_REPO = $(REPO)-release
 
 ARCH      ?= $(shell uname -m)
 BRANCH    ?= 0.43.05
@@ -30,34 +31,37 @@ all: build
 $(MANIFEST): $(MANIFEST).in
 	sed -e 's/@BRANCH@/$(BRANCH)/' -e 's|@EXTRA_DATA@|$(EXTRA_DATA)|' $< > $@
 
-build: deps $(MANIFEST)
-	flatpak-builder --force-clean --arch=$(ARCH) --repo=$(REPO) --ccache --require-changes $(BUILD_DIR) $(MANIFEST)
-	flatpak build-update-repo $(REPO)
+dwarffortress.flatpakref: dwarffortress.flatpakref.in
+	sed -e 's|@URL@|$(URL)|' -e 's|@GPG@|$(shell gpg2 --export $(GPG_KEY) | base64 -w0)|' $< > $@
 
 deps:
 	flatpak $(USER) remote-add --if-not-exists gnome --from https://sdk.gnome.org/gnome.flatpakrepo
 	flatpak $(USER) install gnome org.gnome.Platform//3.24 org.gnome.Sdk//3.24 || true
 
+$(REPO):
+	ostree init --mode=archive-z2 --repo=$(REPO)
+
+$(REL_REPO):
+	ostree init --mode=archive-z2 --repo=$(REL_REPO)
+
+build: deps $(MANIFEST) $(REPO)
+	flatpak-builder --force-clean --arch=$(ARCH) --repo=$(REPO) --ccache --require-changes $(BUILD_DIR) $(MANIFEST)
+	flatpak build-update-repo $(REPO)
+
+release: deps $(MANIFEST) $(REL_REPO)
+	if [ -z "$(GPG_KEY)" ]; then echo "Must provide a GPG key to build a release version"; exit 1; fi
+	flatpak-builder --force-clean --arch=$(ARCH) --repo=$(REL_REPO) --ccache --gpg-sign=$(GPG_KEY) $(BUILD_DIR) $(MANIFEST)
+	flatpak build-update-repo --generate-static-deltas --gpg-sign=$(GPG_KEY) $(REL_REPO)
+
 $(BUNDLE): build
 	flatpak build-bundle --arch=$(ARCH) $(REPO) $(BUNDLE) $(ID) $(BRANCH)
-
-bundle: $(BUNDLE)
 
 install-repo: build
 	flatpak --user remote-add --no-gpg-verify --if-not-exists local-dwarffortress repo
 	flatpak --user install local-dwarffortress $(ID)/$(ARCH)/$(BRANCH)
 
-install: build
-	flatpak $(USER) install --arch=$(ARCH) --bundle $(BUNDLE)
-
-uninstall:
-	flatpak $(USER) uninstall --arch=$(ARCH) $(ID) $(BRANCH)
-
-run:
-	flatpak run --arch=$(ARCH) --branch=$(BRANCH) $(ID)
-
 clean:
 	$(RM) -r $(BUILD_DIR)
 	$(RM) $(BUNDLE)
 
-.PHONY: all build bundle clean clean-build deps $(MANIFEST)
+.PHONY: all build bundle clean deps $(MANIFEST)
