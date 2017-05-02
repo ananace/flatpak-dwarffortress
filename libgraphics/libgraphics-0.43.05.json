@@ -1,0 +1,31 @@
+{
+    "name": "libgraphics",
+    "no-autogen": true,
+    "sources": [
+        {
+            "only-arches": [ "x86_64" ],
+
+            "type": "archive",
+            "url": "http://bay12games.com/dwarves/df_43_05_linux.tar.bz2",
+            "sha256": "856c13170e8beefb5419ae71ee26c85db9716b3ebd4c7348aa44b896bd490be4"
+        },
+        {
+            "only-arches": [ "i386" ],
+
+            "type": "archive",
+            "url": "http://bay12games.com/dwarves/df_43_05_linux32.tar.bz2",
+            "sha256": "0334e6b35ecc36949f5c60ffc1eb46fade3365b55a44f2e11fd4ae799ba7819a"
+        },
+        {
+            "type": "shell",
+            "commands": [
+                "sed -e 's/\\(#include <iostream>\\)/\\1\\n#include <cmath>/' -i g_src/ttf_manager.cpp"
+            ]
+        },
+        {
+            "type": "file",
+            "path": "Makefile",
+            "dest-filename": "Makefile"
+        }
+    ]
+}

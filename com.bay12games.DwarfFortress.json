@@ -1,36 +1,65 @@
 {
-	"app-id": "com.bay12games.DwarfFortress",
-	"branch": "0.43.05",
-	"runtime": "org.gnome.Platform",
-	"runtime-version": "3.24",
-	"sdk": "org.gnome.Sdk",
-	"command": "dwarf-fortress.bin",
-	"finish-args": [
-		"--persist=df_linux",
-		"--share=ipc", "--socket=x11", "--device=dri",
-		"--socket=pulseaudio"
-	],
-	"cleanup": [
-		"/include",
-		"/lib/pkgconfig",
-		"/lib/*.la",
-		"/lib/*.a",
-		"/share/aclocal",
-		"/bin/c*", "/bin/i*", "/bin/n*", "/bin/r*", "/bin/s*", "/bin/t*",
-		"Makefile"
-	],
-	"modules": [
-		"deps/glu-9.0.0.json",
-		"deps/glew-2.0.0.json",
-		"deps/libsdl-1.2.15.json",
-		"deps/sdl_image-1.2.12.json",
-		"deps/sdl_ttf-2.0.11.json",
-		"deps/openal-1.17.2.json",
-		"deps/ncurses-6.0.json",
+    "app-id": "com.bay12games.DwarfFortress",
+    "branch": "0.43.05",
+    "runtime": "org.gnome.Platform",
+    "runtime-version": "3.24",
+    "sdk": "org.gnome.Sdk",
+    "command": "dwarf-fortress",
+    "finish-args": [
+        "--persist=df_linux",
+        "--share=ipc", "--socket=x11", "--device=dri",
+        "--socket=pulseaudio",
 
-		"dwarf-fortress/dwarf-fortress-0.43.05.json",
-		"dwarf-fortress/dwarf-fortress-32-0.43.05.json",
-		"dfhack/dfhack-0.43.05-beta2.json",
-		"dfhack/dfhack-32-0.43.05-beta2.json"
-	]
+        "--extra-data=df_linux.tar.bz2:856c13170e8beefb5419ae71ee26c85db9716b3ebd4c7348aa44b896bd490be4:11580594::http://bay12games.com/dwarves/df_43_05_linux.tar.bz2"
+    ],
+    "cleanup": [
+        "/include",
+        "/lib/pkgconfig",
+        "/lib/*.la",
+        "/lib/*.a",
+        "/share/aclocal",
+        "/bin/c*", "/bin/i*", "/bin/n*", "/bin/r*", "/bin/s*", "/bin/t*",
+        "Makefile"
+    ],
+    "modules": [
+        "deps/glu-9.0.0.json",
+        "deps/glew-2.0.0.json",
+        "deps/libsdl-1.2.15.json",
+        "deps/sdl_image-1.2.12.json",
+        "deps/sdl_ttf-2.0.11.json",
+        "deps/openal-1.17.2.json",
+        "deps/ncurses-6.0.json",
+
+        "libgraphics/libgraphics-0.43.05.json",
+        "dfhack/dfhack-0.43.05.json",
+
+        {
+            "name": "dwarf-fortress",
+            "no-autogen": true,
+
+            "sources": [
+                {
+                    "type": "file",
+                    "path": "com.bay12games.DwarfFortress.desktop"
+                },
+                {
+                    "type": "file",
+                    "path": "com.bay12games.DwarfFortress.png"
+                },
+                {
+                    "type": "file",
+                    "path": "apply_extra.sh"
+                },
+                {
+                    "type": "file",
+                    "path": "dwarf-fortress.sh"
+                },
+                {
+                    "type": "file",
+                    "path": "df-Makefile",
+                    "dest-filename": "Makefile"
+                }
+            ]
+        }
+    ]
 }

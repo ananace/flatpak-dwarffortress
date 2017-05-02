@@ -1,0 +1,17 @@
+{
+    "name": "libgraphics",
+    "no-autogen": true,
+    "only-arches": [ "i386" ],
+    "sources": [
+        {
+            "type": "archive",
+            "url": "http://bay12games.com/dwarves/df_43_03_linux.tar.bz2",
+            "sha256": "8725cb00188b4282fd5a3c4be10c3255f837b951ca48af90fa3a351e3a818337"
+        },
+        {
+            "type": "file",
+            "path": "dwarf-fortress/Makefile",
+            "dest-filename": "Makefile"
+        }
+    ]
+}

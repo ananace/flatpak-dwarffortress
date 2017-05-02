@@ -1,12 +1,9 @@
-INSTALL = /app/dwarf-fortress/dfhack
-
 all: 
 	true
 
-$(INSTALL):
-	cp -rt $(@D) dfhack.init-example dfhack-config/ hack/ stonesense/
-
-install: $(INSTALL)
+install:
+	mkdir -p /app/dfhack
+	cp -rt /app/dfhack dfhack.init-example dfhack-config/ hack/ stonesense/
 
 clean:
 	true

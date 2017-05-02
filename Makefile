@@ -25,6 +25,10 @@ $(BUNDLE): build
 
 bundle: $(BUNDLE)
 
+install-repo: build
+	flatpak --user remote-add --no-gpg-verify --if-not-exists local-dwarffortress repo
+	flatpak --user install local-dwarffortress $(ID)/$(ARCH)/$(BRANCH)
+
 install: build
 	flatpak $(USER) install --arch=$(ARCH) --bundle $(BUNDLE)
 

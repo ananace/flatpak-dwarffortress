@@ -1,0 +1,9 @@
+all:
+	true
+
+install:
+	install -m 0755 apply_extra.sh /app/bin/apply_extra
+	install -m 0755 dwarf-fortress.sh /app/bin/dwarf-fortress
+	mkdir -p /app/export/share/applications /app/export/share/icons/hicolor/256x256/apps/
+	install com.bay12games.DwarfFortress.desktop /app/export/share/applications/
+	install com.bay12games.DwarfFortress.png /app/export/share/icons/hicolor/256x256/apps/
