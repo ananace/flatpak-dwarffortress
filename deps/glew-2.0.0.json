@@ -19,7 +19,7 @@
         },
         {
             "type": "patch",
-            "path": "deps/glew-no-static-lib.patch"
+            "path": "glew-no-static-lib.patch"
         }
     ],
     "cleanup": [

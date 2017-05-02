@@ -38,7 +38,7 @@ while getopts ":hsdR" opt; do
 		\?)
 			echo "Unknown option -$OPTARG"
 			usage
-			exit 0
+			exit 1
 			;;
 	esac
 	shift
@@ -57,7 +57,7 @@ if [ -f dfhack.init ] && [ "$DFHACK" != "false" ]; then
 	DFHACK="true"
 fi
 
-[ "$DFHACK" = "true" ] && DIRS+=( dfhack-config )
+[ "$DFHACK" = "true" ] && DIRS+=( hack dfhack-config )
 #[ "$STONESENSE" = "true" ] && DIRS+=( stonesense )
 [ "$RAW" = "true" ] && DIRS+=( raw )
 

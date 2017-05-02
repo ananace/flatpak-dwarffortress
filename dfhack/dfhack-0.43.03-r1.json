@@ -15,7 +15,7 @@
         },
         {
             "type": "file",
-            "path": "dfhack/Makefile",
+            "path": "Makefile",
             "dest-filename": "Makefile"
         }
     ]

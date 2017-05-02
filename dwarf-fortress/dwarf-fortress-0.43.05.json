@@ -4,11 +4,7 @@
     "build-options": {
         "no-debuginfo": true
     },
-    "arch": {
-        "i386": {
-            "disabled": true
-        }
-    },
+    "only-arches": [ "x86_64" ],
     "cleanup": [
         "/share/man",
         "/lib/debug"
@@ -22,27 +18,28 @@
         {
             "type": "shell",
             "commands": [
-                "rm df libs/lib*.so*"
+                "rm df libs/lib*.so*",
+                "sed -e 's/\\(#include <iostream>\\)/\\1\\n#include <cmath>/' -i g_src/ttf_manager.cpp"
             ]
         },
         {
             "type": "file",
-            "path": "dwarf-fortress/com.bay12games.DwarfFortress.desktop",
+            "path": "com.bay12games.DwarfFortress.desktop",
             "dest-filename": "com.bay12games.DwarfFortress.desktop"
         },
         {
             "type": "file",
-            "path": "dwarf-fortress/com.bay12games.DwarfFortress.png",
+            "path": "com.bay12games.DwarfFortress.png",
             "dest-filename": "com.bay12games.DwarfFortress.png"
         },
         {
             "type": "file",
-            "path": "dwarf-fortress/dwarf-fortress.bin",
+            "path": "dwarf-fortress.bin",
             "dest-filename": "dwarf-fortress.bin"
         },
         {
             "type": "file",
-            "path": "dwarf-fortress/Makefile",
+            "path": "Makefile",
             "dest-filename": "Makefile"
         }
     ]

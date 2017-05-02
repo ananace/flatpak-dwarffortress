@@ -12,13 +12,20 @@ MANIFEST = $(ID).json
 
 all: build
 
-build:
-	flatpak-builder --arch=$(ARCH) --repo $(REPO) $(BUILD_DIR) $(MANIFEST)
+build: deps
+	flatpak-builder --force-clean --arch=$(ARCH) --repo=$(REPO) --ccache --require-changes $(BUILD_DIR) $(MANIFEST)
+	flatpak build-update-repo $(REPO)
+
+deps:
+	flatpak $(USER) remote-add --if-not-exists gnome --from https://sdk.gnome.org/gnome.flatpakrepo
+	flatpak $(USER) install gnome org.gnome.Platform//3.24 org.gnome.Sdk//3.24 || true
 
 $(BUNDLE): build
 	flatpak build-bundle --arch=$(ARCH) $(REPO) $(BUNDLE) $(ID) $(BRANCH)
 
-install: $(BUNDLE)
+bundle: $(BUNDLE)
+
+install: build
 	flatpak $(USER) install --arch=$(ARCH) --bundle $(BUNDLE)
 
 uninstall:
@@ -27,10 +34,8 @@ uninstall:
 run:
 	flatpak run --arch=$(ARCH) --branch=$(BRANCH) $(ID)
 
-clean-build:
+clean:
 	$(RM) -r $(BUILD_DIR)
-
-clean: clean-build
 	$(RM) $(BUNDLE)
 
-.PHONY: all clean clean-build
+.PHONY: all build bundle clean clean-build deps
