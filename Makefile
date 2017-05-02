@@ -1,14 +1,12 @@
-ID := com.bay12games.DwarfFortress
-BUNDLE := dwarffortress.flatpak
+override BUNDLE   := dwarffortress.flatpak
+override ID       := com.bay12games.DwarfFortress
+override MANIFEST := $(ID).json
+override USER     := --user
 
-USER := --user
+ARCH      ?= $(shell uname -m)
+BRANCH    ?= 0.43.05
 BUILD_DIR ?= build
-REPO ?= repo
-
-ARCH ?= $(shell uname -m)
-BRANCH ?= 0.43.05
-
-MANIFEST = $(ID).json
+REPO      ?= repo
 
 # TODO: Make a generator script for this instead of having a messy makefile
 ifeq ($(BRANCH),0.43.05)
