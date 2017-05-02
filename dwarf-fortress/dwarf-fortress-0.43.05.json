@@ -4,11 +4,7 @@
     "build-options": {
         "no-debuginfo": true
     },
-    "arch": {
-        "i386": {
-            "disabled": true
-        }
-    },
+    "only-arches": [ "x86_64" ],
     "cleanup": [
         "/share/man",
         "/lib/debug"
