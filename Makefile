@@ -36,7 +36,7 @@ dwarffortress.flatpakref: dwarffortress.flatpakref.in
 
 deps:
 	flatpak $(USER) remote-add --if-not-exists gnome --from https://sdk.gnome.org/gnome.flatpakrepo
-	flatpak $(USER) install gnome org.gnome.Platform//3.24 org.gnome.Sdk//3.24 || true
+	flatpak $(USER) install gnome org.gnome.Platform/$(ARCH)/3.24 org.gnome.Sdk/$(ARCH)/3.24 || true
 
 $(REPO):
 	ostree init --mode=archive-z2 --repo=$(REPO)
