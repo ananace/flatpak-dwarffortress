@@ -10,6 +10,10 @@
         "--share=ipc", "--socket=x11", "--device=dri",
         "--socket=pulseaudio",
 
+        "--extension=com.bay12games.DwarfFortress.dfhack=directory=/app/dfhack",
+        "--extension=com.bay12games.DwarfFortress.dfhack=no-autodownload=true",
+        "--extension=com.bay12games.DwarfFortress.dfhack=version=@BRANCH@",
+
         "--extra-data=df_linux.tar.bz2:@EXTRA_DATA@"
     ],
     "cleanup": [
