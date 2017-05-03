@@ -5,4 +5,5 @@ repo-release/
 *.flatpak
 *.tar.*
 com.bay12games.DwarfFortress.json
+com.bay12games.DwarfFortress.dfhack.json
 dwarffortress.flatpakref

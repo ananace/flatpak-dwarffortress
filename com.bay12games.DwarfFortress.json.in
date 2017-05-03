@@ -35,7 +35,6 @@
         "deps/ncurses-6.0.json",
 
         "libgraphics/libgraphics-@BRANCH@.json",
-        "dfhack/dfhack-@BRANCH@.json",
 
         {
             "name": "dwarf-fortress",

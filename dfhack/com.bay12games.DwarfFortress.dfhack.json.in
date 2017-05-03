@@ -1,0 +1,25 @@
+{
+    "app-id": "com.bay12games.DwarfFortress.dfhack",
+    "branch": "@HACK_VER@",
+    "runtime": "org.gnome.Platform",
+    "runtime-version": "3.24",
+    "sdk": "org.gnome.Sdk",
+    "build-extension": true,
+    "build-options": {
+        "prefix": "/app/dfhack"
+    },
+    "modules": [
+        {
+            "name": "dfhack",
+            "buildsystem": "cmake",
+
+            "sources": [
+                {
+                    "type": "git",
+                    "url": "git://github.com/DFHack/dfhack",
+                    "branch": "@DF_VER@-@HACK_VER@"
+                }
+            ]
+        }
+    ]
+}
