@@ -3,11 +3,12 @@ override ID       := com.bay12games.DwarfFortress
 override MANIFEST := $(ID).json
 override REL_REPO = $(REPO)-release
 
-ARCH      ?= $(shell uname -m)
-BRANCH    ?= 0.43.05
-BUILD_DIR ?= build
-REPO      ?= repo
-USER      := --user
+ARCH         := $(shell uname -m)
+BRANCH       := 0.43.05
+BUILD_DIR    := build
+BUILDER_ARGS := 
+REPO         := repo
+USER         := --user
 
 # TODO: Make a generator script for this instead of having a messy makefile
 ifeq ($(BRANCH),0.43.05)
@@ -46,12 +47,12 @@ $(REL_REPO):
 	ostree init --mode=archive-z2 --repo=$(REL_REPO)
 
 build: deps $(MANIFEST) $(REPO)
-	flatpak-builder --force-clean --arch=$(ARCH) --repo=$(REPO) --ccache --require-changes $(BUILD_DIR) $(MANIFEST)
+	flatpak-builder $(BUILDER_ARGS) --force-clean --arch=$(ARCH) --repo=$(REPO) --ccache --require-changes $(BUILD_DIR) $(MANIFEST)
 	flatpak build-update-repo $(REPO)
 
 release: deps $(MANIFEST) $(REL_REPO)
 	if [ -z "$(GPG_KEY)" ]; then echo "Must provide a GPG key to build a release version"; exit 1; fi
-	flatpak-builder --force-clean --arch=$(ARCH) --repo=$(REL_REPO) --ccache --gpg-sign=$(GPG_KEY) $(BUILD_DIR) $(MANIFEST)
+	flatpak-builder $(BUILDER_ARGS) --force-clean --arch=$(ARCH) --repo=$(REL_REPO) --ccache --gpg-sign=$(GPG_KEY) $(BUILD_DIR) $(MANIFEST)
 	flatpak build-update-repo --generate-static-deltas --gpg-sign=$(GPG_KEY) $(REL_REPO)
 
 $(BUNDLE): build
