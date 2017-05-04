@@ -8,6 +8,7 @@ BRANCH       := 0.43.05
 BUILD_DIR    := build
 BUILDER_ARGS := 
 REPO         := repo
+SHELL        := bash # To support the 'echo -e'
 USER         := --user
 
 # TODO: Make a generator script for this instead of having a messy makefile
@@ -38,7 +39,7 @@ dwarffortress.flatpakref: dwarffortress.flatpakref.in
 deps:
 	flatpak $(USER) remote-add --if-not-exists gnome --from https://sdk.gnome.org/gnome.flatpakrepo
 	flatpak $(USER) install gnome org.gnome.Platform/$(ARCH)/3.24 org.gnome.Sdk/$(ARCH)/3.24 || true
-	if [ "$(shell echo -e "0.9.2\n$$(flatpak --version | awk '{print $$2}')" | sort -V | tail -n1)" = "0.9.2" ]; then echo "New Flatpak versions use relative file paths"; cp deps/*.patch .; fi
+	if [ "$(shell echo -e "0.9.2\n$$(flatpak --version | awk '{print $$2}')" | sort -V | tail -n1)" = "0.9.2" ]; then echo "Flatpak 0.9.3 and forward use relative file paths"; cp deps/*.patch .; fi
 
 $(REPO):
 	ostree init --mode=archive-z2 --repo=$(REPO)
