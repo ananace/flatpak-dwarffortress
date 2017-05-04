@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# TODO Build a runtime directory in /tmp
+# find + ln -s should be able to do all that's needed
+# But only if the user wants it that way
 cd ~/df_linux || exit 1
 
 DFHACK=""
@@ -9,7 +12,7 @@ usage() {
     cat <<EOF
 Usage: $0 [OPTION...]
 
-Application data can be found in ~/.var/app/com.bay12games.DwarfFortress/df_linux/
+Application data can be found in ~/.var/app/com.bay12games.DwarfFortress/
 
 If a dfhack init file has been created, then the default is to run dfhack.
 
@@ -17,7 +20,7 @@ Options:
  -d   Runs plain Dwarf Fortress
  -h   Runs dfhack, creating an init file if one doesn't already exist
  -s   Copies over files needed to run Stonesense
- -R   Copies raw files into the application data folder, for modding purposes
+ -R   Copies raw files into the application data folder, only needs to be done once
 EOF
 }
 
@@ -44,7 +47,7 @@ while getopts ":hsdR" opt; do
     shift
 done
 
-if [ ! -d /app/dfhack ]; then
+if [ ! -d /app/dfhack/hack ]; then
     [ "$DFHACK" = "true" ] && ( echo "This version of com.bay12games.DwarfFortress does not come with dfhack support. Sorry."; exit 1; )
     DFHACK="false"
 fi
@@ -53,10 +56,14 @@ DIRS=( data )
 HACKDIRS=( )
 FILES=( '*.txt' README.linux )
 
-if [ -f dfhack.init ] && [ "$DFHACK" != "false" ]; then
-    DFHACK="true"
-fi
+[ -f dfhack.init ] && [ "$DFHACK" != "false" ] && DFHACK="true"
 
+if [ "$DFHACK" = "true" ] && [ ! -t 0 ] && [ ! -t 1 ]; then
+    # FIXME Can this be done, or maybe open a separate terminal for handling dfhack?
+    # TODO Show this message to the user
+    echo "Trying to run dfhack outside of terminal, this won't work at the moment."
+    DFHACK="false"
+fi
 [ "$DFHACK" = "true" ] && HACKDIRS+=( hack dfhack-config )
 [ "$STONESENSE" = "true" ] && HACKDIRS+=( stonesense )
 [ "$RAW" = "true" ] && DIRS+=( raw )
