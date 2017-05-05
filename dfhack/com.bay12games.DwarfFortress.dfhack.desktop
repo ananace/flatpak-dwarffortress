@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=Dwarf Fortress + DFHack
+Icon=com.bay12games.DwarfFortress
+Exec=dwarf-fortress -h
+Terminal=true
+Categories=Game;
+StartupWMClass=DwarfFortress

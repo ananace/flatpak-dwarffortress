@@ -11,6 +11,10 @@
         },
         {
             "type": "file",
+            "path": "com.bay12games.DwarfFortress.dfhack.desktop"
+        },
+        {
+            "type": "file",
             "path": "Makefile",
             "dest-filename": "Makefile"
         }
