@@ -7,6 +7,7 @@ cd ~/df_linux || exit 1
 
 DFHACK=""
 STONESENSE=""
+RAW="true" # TODO: Finish the above todo, return this to its proper function
 
 usage() {
     cat <<EOF
@@ -20,7 +21,6 @@ Options:
  -d   Runs plain Dwarf Fortress
  -h   Runs dfhack, creating an init file if one doesn't already exist
  -s   Copies over files needed to run Stonesense
- -R   Copies raw files into the application data folder, only needs to be done once
 EOF
 }
 
