@@ -38,8 +38,7 @@ dwarffortress.flatpakref: dwarffortress.flatpakref.in
 
 deps:
 	flatpak $(USER) remote-add --if-not-exists gnome --from https://sdk.gnome.org/gnome.flatpakrepo
-	flatpak $(USER) install -y gnome org.gnome.Platform/$(ARCH)/3.24 || true
-	flatpak $(USER) install -y gnome org.gnome.Sdk/$(ARCH)/3.24 || true
+	flatpak $(USER) install -y gnome org.gnome.Platform/$(ARCH)/3.24 org.gnome.Sdk/$(ARCH)/3.24 || true
 	if [ "$(shell echo -e "0.9.2\n$$(flatpak --version | awk '{print $$2}')" | sort -V | tail -n1)" = "0.9.2" ]; then cp deps/*.patch .; fi
 
 $(REPO):
