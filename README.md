@@ -1,5 +1,17 @@
 Dwarf Fortress
-====
+==============
+
+A pre-built version of 0.43.05 is available at;
+```
+$ flatpak --user install http://www.lysator.liu.se/~ace/dwarffortress.flatpakref
+```
+
+The application data when run can be found in `~/.var/app/com.bay12games.DwarfFortress/df_linux`
+
+**NB**: To run with dfhack, you might need to run from a terminal currently, it seems like `Terminal: true` in the .desktop file is misbehaving.
+
+Compilation info
+----------------
 
 This repo contains the data necessary to compile Dwarf Fortress into a Flatpak.
 Currently supported versions are;
@@ -9,15 +21,14 @@ Currently supported versions are;
 
 To build and install/run the application locally you can do the following;
 ```
-$ # Available options;
-$ #   ARCH   - The architecture to use (i386, x86_64), defaults to the running arch.
-$ #   BRANCH - The version to build, defaults to the latest version.
+# Available options;
+#   ARCH   - The architecture to use (i386, x86_64), defaults to the running arch.
+#   BRANCH - The version to build, defaults to the latest version.
+
 $ export BRANCH=0.43.03 ARCH=i386
 $ make 
 $ make install-repo
 ```
-
-The application data when run can be found in `~/.var/app/com.bay12games.DwarfFortress/df_linux`
 
 ### TODO
 
