@@ -2,6 +2,8 @@ all:
 	true
 
 install:
+	ln -s /usr/lib/libncursesw.so /app/lib/libncurses.so
+	ln -s /usr/lib/libncursesw.so /app/lib/libncurses.so.5
 	install -m 0755 apply_extra.sh /app/bin/apply_extra
 	install -m 0755 dwarf-fortress.sh /app/bin/dwarf-fortress
 	mkdir -p /app/share/applications /app/share/icons/hicolor/256x256/apps/
