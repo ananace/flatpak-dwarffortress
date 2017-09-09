@@ -8,7 +8,7 @@ $ flatpak --user install http://www.lysator.liu.se/~ace/dwarffortress.flatpakref
 
 The application data when run can be found in `~/.var/app/com.bay12games.DwarfFortress/df_linux`
 
-**NB**: To run with dfhack, you might need to run from a terminal currently, it seems like `Terminal: true` in the .desktop file is misbehaving.
+To run with dfhack, you might need to run from a terminal currently, it seems like `Terminal: true` in the .desktop file can misbehave.
 
 Compilation info
 ----------------
