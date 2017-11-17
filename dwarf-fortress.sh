@@ -60,15 +60,29 @@ fi
 [ "$DFHACK" = "true" ] && HACKDIRS+=( hack dfhack-config stonesense )
 
 for DIR in "${DIRS[@]}"; do
-    cp -nr "/app/extra/$DIR" .
+    if [ ! -e "$DIR/.skip" ]; then
+        cp -nr "/app/extra/$DIR" .
+    fi
 done
 for DIR in "${HACKDIRS[@]}"; do
-    cp -nr "/app/dfhack/$DIR" .
+    if [ ! -e "$DIR/.skip" ]; then
+        cp -nr "/app/dfhack/$DIR" .
+    fi
 done
 for PATTERN in "${FILES[@]}"; do
     for FILE in /app/extra/$PATTERN; do
-        [ -f "$FILE" ] && cp -n "$FILE" .
+        if [ ! -e ".$FILE.skip" ]; then
+            [ -f "$FILE" ] && cp -n "$FILE" .
+        fi
     done
+done
+
+# Don't overwrite user configuration by default
+AUTOSKIP=( data/init/init.txt data/init/g_init.txt dfhack.init )
+
+for FILE in "${AUTOSKIP[@]}"; do
+    SKIPNAME="$(pwd)/$(dirname "$FILE")/.$(basename "$FILE").skip"
+    [ -e "$SKIPNAME" ] || touch "$SKIPNAME"
 done
 
 if [ "$DFHACK" = "true" ] && [ ! -f dfhack.init ]; then
