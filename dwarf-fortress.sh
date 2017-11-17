@@ -1,26 +1,25 @@
 #!/bin/bash
 
-# TODO Build a runtime directory in /tmp
-# find + ln -s should be able to do all that's needed
-# But only if the user wants it that way
+# XXX Build a runtime directory in /tmp?
 cd ~/df_linux || exit 1
 
 DFHACK=""
-STONESENSE=""
-RAW="true" # TODO: Finish the above todo, return this to its proper function
 
 usage() {
     cat <<EOF
 Usage: $0 [OPTION...]
 
-Application data can be found in ~/.var/app/com.bay12games.DwarfFortress/
+Application data can be found in ~/.var/app/com.bay12games.DwarfFortress/df_linux/
 
-If a dfhack init file has been created, then the default is to run dfhack.
+By default, this will launch plain Dwarf Fortress.
+If a dfhack init file exists then it will launch DFHack by default.
+
+If a file named .dfrc exists in df_linux, then it will be sourced before launching Dwarf Fortress.
+If a file named .dfhackrc exists in df_linux, then it will be sourced before setting up dfhack.
 
 Options:
  -d   Runs plain Dwarf Fortress
  -h   Runs dfhack, creating an init file if one doesn't already exist
- -s   Copies over files needed to run Stonesense
 EOF
 }
 
@@ -29,14 +28,8 @@ while getopts ":hsdR" opt; do
         h)
             DFHACK="true"
             ;;
-        s)
-            STONESENSE="true"
-            ;;
         d)
             DFHACK="false"
-            ;;
-        R)
-            RAW="true"
             ;;
         \?)
             echo "Unknown option -$OPTARG"
@@ -52,21 +45,19 @@ if [ ! -d /app/dfhack/hack ]; then
     DFHACK="false"
 fi
 
-DIRS=( data )
+DIRS=( data raw )
 HACKDIRS=( )
 FILES=( '*.txt' README.linux )
 
 [ -f dfhack.init ] && [ "$DFHACK" != "false" ] && DFHACK="true"
 
 if [ "$DFHACK" = "true" ] && [ ! -t 0 ] && [ ! -t 1 ]; then
-    # FIXME Can this be done, or maybe open a separate terminal for handling dfhack?
+    # FIXME Can this be done, or maybe a separate terminal could be opened for handling dfhack?
     # TODO Show this message to the user
     echo "Trying to run dfhack outside of terminal, this won't work at the moment."
     DFHACK="false"
 fi
-[ "$DFHACK" = "true" ] && HACKDIRS+=( hack dfhack-config )
-[ "$STONESENSE" = "true" ] && HACKDIRS+=( stonesense )
-[ "$RAW" = "true" ] && DIRS+=( raw )
+[ "$DFHACK" = "true" ] && HACKDIRS+=( hack dfhack-config stonesense )
 
 for DIR in "${DIRS[@]}"; do
     cp -nr "/app/extra/$DIR" .
@@ -87,12 +78,17 @@ fi
 
 if [ "$DFHACK" = "true" ] || [ -f dfhack.init ] && [ "$DFHACK" != "false" ]; then
     RC='.dfhackrc'
-    if [ -r "$HOME/$RC" ]; then
-        . "$HOME/$RC"
+    if [ -r "$RC" ]; then
+        . "$RC"
     fi
 
     export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/app/dfhack/hack/libs:/app/dfhack/hack"
     export LD_PRELOAD="${PRELOAD_LIB:+/app/$PRELOAD_LIB:}/app/dfhack/hack/libdfhack.so"
+fi
+
+RC='.dfrc'
+if [ -r "$RC" ]; then
+    . "$RC"
 fi
 
 /app/extra/libs/Dwarf_Fortress "$@"
