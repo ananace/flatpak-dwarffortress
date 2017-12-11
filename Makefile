@@ -4,7 +4,7 @@ override MANIFEST := $(ID).json
 override REL_REPO = $(REPO)-release
 
 ARCH         := $(shell uname -m)
-BRANCH       := 0.43.05
+BRANCH       := 0.44.02
 BUILD_DIR    := build
 BUILDER_ARGS := 
 REPO         := repo
@@ -12,7 +12,13 @@ SHELL        := bash # To support the 'echo -e'
 USER         := --user
 
 # TODO: Make a generator script for this instead of having a messy makefile
-ifeq ($(BRANCH),0.43.05)
+ifeq ($(BRANCH),0.44.02)
+ifeq ($(ARCH),x86_64)
+	EXTRA_DATA = 504d0d9ea7d11d64cae0444ee2589bc4afdda7fbb5bb1276ddacac2ebb364bf0:11940967::http://bay12games.com/dwarves/df_44_02_linux.tar.bz2
+else
+	EXTRA_DATA = d0721cd577fcc14729b76754c30feb6fda7029275bb0a9b1f6bca940fd9b1ffb:12542806::http://bay12games.com/dwarves/df_44_02_linux32.tar.bz2
+endif
+else ifeq ($(BRANCH),0.43.05)
 ifeq ($(ARCH),x86_64)
 	EXTRA_DATA = 856c13170e8beefb5419ae71ee26c85db9716b3ebd4c7348aa44b896bd490be4:11580594::http://bay12games.com/dwarves/df_43_05_linux.tar.bz2
 else
@@ -38,7 +44,7 @@ dwarffortress.flatpakref: dwarffortress.flatpakref.in
 
 deps:
 	flatpak $(USER) remote-add --if-not-exists gnome --from https://sdk.gnome.org/gnome.flatpakrepo
-	flatpak $(USER) install -y gnome org.gnome.Platform/$(ARCH)/3.24 org.gnome.Sdk/$(ARCH)/3.24 || true
+	flatpak $(USER) install -y gnome org.gnome.Platform/$(ARCH)/3.26 org.gnome.Sdk/$(ARCH)/3.26 || true
 	if [ "$(shell echo -e "0.9.2\n$$(flatpak --version | awk '{print $$2}')" | sort -V | tail -n1)" = "0.9.2" ]; then cp deps/*.patch .; fi
 
 $(REPO):
