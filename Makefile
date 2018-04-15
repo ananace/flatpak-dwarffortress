@@ -4,15 +4,21 @@ override MANIFEST := $(ID).json
 override REL_REPO = $(REPO)-release
 
 ARCH         := $(shell uname -m)
-BRANCH       := 0.44.02
+BRANCH       := 0.44.07
 BUILD_DIR    := build
-BUILDER_ARGS := 
+BUILDER_ARGS :=
 REPO         := repo
 SHELL        := bash # To support the 'echo -e'
 USER         := --user
 
 # TODO: Make a generator script for this instead of having a messy makefile
-ifeq ($(BRANCH),0.44.02)
+ifeq ($(BRANCH),0.44.07)
+ifeq ($(ARCH),x86_64)
+	EXTRA_DATA = 2b41550b486ebfdb7972f730607f7ed9e192c9b31633454606134eb2e57f25b6:11999119::http://bay12games.com/dwarves/df_44_07_linux.tar.bz2
+else
+	EXTRA_DATA = 347736edcd10a2506a29ea2acadaa27c2ad019f13f453830f141006d8ea72806:12613293::http://bay12games.com/dwarves/df_44_07_linux32.tar.bz2
+endif
+else ifeq ($(BRANCH),0.44.02)
 ifeq ($(ARCH),x86_64)
 	EXTRA_DATA = 504d0d9ea7d11d64cae0444ee2589bc4afdda7fbb5bb1276ddacac2ebb364bf0:11940967::http://bay12games.com/dwarves/df_44_02_linux.tar.bz2
 else

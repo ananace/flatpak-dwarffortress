@@ -1,0 +1,31 @@
+{
+    "name": "dfhack",
+    "no-autogen": true,
+    "sources": [
+        {
+            "only-arches": [ "x86_64" ],
+
+            "type": "archive",
+            "url": "https://github.com/DFHack/dfhack/releases/download/0.44.07-beta1/dfhack-0.44.07-beta1-Linux-64-gcc-4.8.tar.bz2",
+            "sha256": "8f74318a571c3ff36d5ebc4ea3a7d6129f8bca620e13a8f4d6ccfb9a334107e5",
+            "strip-components": 0
+        },
+        {
+            "only-arches": [ "i386" ],
+
+            "type": "archive",
+            "url": "https://github.com/DFHack/dfhack/releases/download/0.44.07-beta1/dfhack-0.44.07-beta1-Linux-32-gcc-4.8.tar.bz2",
+            "sha256": "3b9806ff7846c568bfb7ee0c169d928d576bdf315334ba974d30ba8fa125c494",
+            "strip-components": 0
+        },
+        {
+            "type": "file",
+            "path": "com.bay12games.DwarfFortress.dfhack.desktop"
+        },
+        {
+            "type": "file",
+            "path": "Makefile",
+            "dest-filename": "Makefile"
+        }
+    ]
+}
