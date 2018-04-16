@@ -18,6 +18,8 @@ Currently supported versions are;
 
 - 0.43.03 i386, w/ dfhack
 - 0.43.05 i386 & x86\_64, w/ dfhack
+- 0.44.02 i386 & x86\_64, w/ dfhack
+- 0.44.07 i386 & x86\_64, w/ dfhack
 
 To build and install/run the application locally you can do the following;
 ```
@@ -26,7 +28,7 @@ To build and install/run the application locally you can do the following;
 #   BRANCH - The version to build, defaults to the latest version.
 
 $ export BRANCH=0.43.03 ARCH=i386
-$ make 
+$ make
 $ make install-repo
 ```
 
