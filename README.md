@@ -1,14 +1,12 @@
 Dwarf Fortress
 ==============
 
-A pre-built version of 0.43.05 is available at;
+A pre-built version of 0.44.06 is available at;
 ```
 $ flatpak --user install http://www.lysator.liu.se/~ace/dwarffortress.flatpakref
 ```
 
 The application data when run can be found in `~/.var/app/com.bay12games.DwarfFortress/df_linux`
-
-To run with dfhack, you might need to run from a terminal currently, it seems like `Terminal: true` in the .desktop file can misbehave.
 
 Compilation info
 ----------------
@@ -24,10 +22,11 @@ Currently supported versions are;
 To build and install/run the application locally you can do the following;
 ```
 # Available options;
-#   ARCH   - The architecture to use (i386, x86_64), defaults to the running arch.
-#   BRANCH - The version to build, defaults to the latest version.
+#   ARCH    - The architecture to use (i386, x86_64), defaults to the running arch.
+#   BRANCH  - The version to build, defaults to the latest version.
+#   GPG_KEY - The GPG key to use for when signing a release, not used for devel
 
-$ export BRANCH=0.43.03 ARCH=i386
+$ export BRANCH=0.43.03 ARCH=i386 GPG_KEY=1234567
 $ make
 $ make install-repo
 ```
