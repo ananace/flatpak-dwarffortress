@@ -46,7 +46,7 @@ $(MANIFEST): $(MANIFEST).in
 	sed -e 's/@BRANCH@/$(BRANCH)/' -e 's|@EXTRA_DATA@|$(EXTRA_DATA)|' $< > $@
 
 dwarffortress.flatpakref: dwarffortress.flatpakref.in
-	sed -e 's|@URL@|$(URL)|' -e 's|@GPG@|$(shell gpg2 --export $(GPG_KEY) | base64 -w0)|' $< > $@
+	sed -e 's|@BRANCH@|$(BRANCH)|' -e 's|@URL@|$(URL)|' -e 's|@GPG@|$(shell gpg2 --export $(GPG_KEY) | base64 -w0)|' $< > $@
 
 deps:
 	flatpak $(USER) remote-add --if-not-exists flathub --from https://flathub.org/repo/flathub.flatpakrepo
