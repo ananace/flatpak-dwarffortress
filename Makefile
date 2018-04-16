@@ -49,8 +49,8 @@ dwarffortress.flatpakref: dwarffortress.flatpakref.in
 	sed -e 's|@URL@|$(URL)|' -e 's|@GPG@|$(shell gpg2 --export $(GPG_KEY) | base64 -w0)|' $< > $@
 
 deps:
-	flatpak $(USER) remote-add --if-not-exists gnome --from https://sdk.gnome.org/gnome.flatpakrepo
-	flatpak $(USER) install -y gnome org.gnome.Platform/$(ARCH)/3.26 org.gnome.Sdk/$(ARCH)/3.26 || true
+	flatpak $(USER) remote-add --if-not-exists flathub --from https://flathub.org/repo/flathub.flatpakrepo
+	flatpak $(USER) install -y gnome org.gnome.Platform/$(ARCH)/3.28 org.gnome.Sdk/$(ARCH)/3.28 || true
 	if [ "$(shell echo -e "0.9.2\n$$(flatpak --version | awk '{print $$2}')" | sort -V | tail -n1)" = "0.9.2" ]; then cp deps/*.patch .; fi
 
 $(REPO):
