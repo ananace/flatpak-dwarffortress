@@ -1,7 +1,7 @@
 Dwarf Fortress
 ==============
 
-A pre-built version of 0.44.06 is available at;
+A pre-built version of 0.44.07 is available at;
 ```
 $ flatpak --user install http://www.lysator.liu.se/~ace/dwarffortress.flatpakref
 ```
