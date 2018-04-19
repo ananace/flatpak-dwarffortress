@@ -6,16 +6,16 @@
             "only-arches": [ "x86_64" ],
 
             "type": "archive",
-            "url": "https://github.com/DFHack/dfhack/releases/download/0.44.02-alpha1/dfhack-0.44.02-alpha1-Linux-32-gcc-5.4.0.tar.bz2",
-            "sha256": "57da349c90816910816e98311bf39056ac0e82346f1400a5bf58d93573762177",
+            "url": "https://github.com/DFHack/dfhack/releases/download/0.44.09-r1/dfhack-0.44.09-r1-Linux-64-gcc-7.tar.bz2",
+            "sha256": "7e8d49c95b733c135b32c6a61376c81aa8340f95de77708573bdb626b5a10ad6",
             "strip-components": 0
         },
         {
             "only-arches": [ "i386" ],
 
             "type": "archive",
-            "url": "https://github.com/DFHack/dfhack/releases/download/0.44.02-alpha1/dfhack-0.44.02-alpha1-Linux-64-gcc-5.4.0.tar.bz2",
-            "sha256": "2360eaa7493692f9c57c26ddd049eedc0bd2e60b4b15eee0415f78ec35cf7747",
+            "url": "https://github.com/DFHack/dfhack/releases/download/0.44.09-r1/dfhack-0.44.09-r1-Linux-32-gcc-7.tar.bz2",
+            "sha256": "17b7191e2fc73a09145dad20229e53833f022295ee2605f1fd7342f7891390d9",
             "strip-components": 0
         },
         {

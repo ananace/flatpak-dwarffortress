@@ -4,7 +4,7 @@ override MANIFEST := $(ID).json
 override REL_REPO = $(REPO)-release
 
 ARCH         := $(shell uname -m)
-BRANCH       := 0.44.07
+BRANCH       := 0.44.09
 BUILD_DIR    := build
 BUILDER_ARGS :=
 REPO         := repo
@@ -12,7 +12,13 @@ SHELL        := bash # To support the 'echo -e'
 USER         := --user
 
 # TODO: Make a generator script for this instead of having a messy makefile
-ifeq ($(BRANCH),0.44.07)
+ifeq ($(BRANCH),0.44.09)
+ifeq ($(ARCH),x86_64)
+	EXTRA_DATA = beb11c4e2757eb2edd8079a18b51e1dc8c9b42ed384cfc7ff6f88637ad9f51c1:11997670::http://bay12games.com/dwarves/df_44_09_linux.tar.bz2
+else
+	EXTRA_DATA = 484eba290a3316df189ece4bd9317770771f0ec2164ed07d91bc497e5ccbab52:12614403::http://bay12games.com/dwarves/df_44_09_linux32.tar.bz2
+endif
+else ifeq ($(BRANCH),0.44.07)
 ifeq ($(ARCH),x86_64)
 	EXTRA_DATA = 2b41550b486ebfdb7972f730607f7ed9e192c9b31633454606134eb2e57f25b6:11999119::http://bay12games.com/dwarves/df_44_07_linux.tar.bz2
 else
@@ -37,7 +43,7 @@ else
 	$(error Dwarf Fortress 0.43.03 and earlier only support 32-bit environments)
 endif
 else
-	$(error Only Dwarf Fortress 0.43.03 and 0.43.05 can be built at the moment)
+	$(error Only certain versions of Dwarf Fortress can be built at the moment, look in the Makefile for a list)
 endif
 
 all: build
@@ -60,7 +66,7 @@ $(REL_REPO):
 	ostree init --mode=archive-z2 --repo=$(REL_REPO)
 
 build: deps $(MANIFEST) $(REPO)
-	if [ "$(shell echo -e "0.9.2\n$$(flatpak --version | awk '{print $$2}')" | sort -V | tail -n1)" = "0.9.2" ]; then cp dfhack/*.desktop .; fi
+	if [ "$(shell echo -e "0.9.2\n$$(flatpak --version | awk '{print $$2}')" | sort -V | tail -n1)" = "0.9.2" ]; then cp -t . dfhack/*.desktop dfhack/*Makefile; fi
 	flatpak-builder $(BUILDER_ARGS) --force-clean --arch=$(ARCH) --repo=$(REPO) --ccache --require-changes $(BUILD_DIR) $(MANIFEST)
 	flatpak build-update-repo $(REPO)
 

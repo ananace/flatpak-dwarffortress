@@ -15,7 +15,7 @@
         },
         {
             "type": "file",
-            "path": "Makefile",
+            "path": "hack-Makefile",
             "dest-filename": "Makefile"
         }
     ]
