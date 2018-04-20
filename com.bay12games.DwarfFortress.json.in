@@ -36,6 +36,7 @@
 
         "libgraphics/libgraphics-@BRANCH@.json",
         "dfhack/dfhack-@BRANCH@.json",
+        "twbt/twbt-@BRANCH@.json",
 
         {
             "name": "dwarf-fortress",
