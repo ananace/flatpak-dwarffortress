@@ -18,6 +18,7 @@ Currently supported versions are;
 - 0.43.05 i386 & x86\_64, w/ dfhack
 - 0.44.02 i386 & x86\_64, w/ dfhack
 - 0.44.07 i386 & x86\_64, w/ dfhack
+- 0.44.09 i386 & x86\_64, w/ dfhack
 
 To build and install/run the application locally you can do the following;
 ```
