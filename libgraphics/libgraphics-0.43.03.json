@@ -10,7 +10,7 @@
         },
         {
             "type": "file",
-            "path": "Makefile",
+            "path": "lg-Makefile",
             "dest-filename": "Makefile"
         }
     ]

@@ -66,7 +66,7 @@ $(REL_REPO):
 	ostree init --mode=archive-z2 --repo=$(REL_REPO)
 
 build: deps $(MANIFEST) $(REPO)
-	if [ "$(shell echo -e "0.9.2\n$$(flatpak --version | awk '{print $$2}')" | sort -V | tail -n1)" = "0.9.2" ]; then cp -t . dfhack/*.desktop dfhack/*Makefile; fi
+	if [ "$(shell echo -e "0.9.2\n$$(flatpak --version | awk '{print $$2}')" | sort -V | tail -n1)" = "0.9.2" ]; then cp -t . dfhack/*.desktop dfhack/*Makefile libgraphics/*Makefile; fi
 	flatpak-builder $(BUILDER_ARGS) --force-clean --arch=$(ARCH) --repo=$(REPO) --ccache --require-changes $(BUILD_DIR) $(MANIFEST)
 	flatpak build-update-repo $(REPO)
 
