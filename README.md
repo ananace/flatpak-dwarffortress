@@ -12,6 +12,8 @@ Compilation info
 ----------------
 
 This repo contains the data necessary to compile Dwarf Fortress into a Flatpak.
+
+#### Supported Versions
 Currently supported versions are;
 
 - 0.43.03 i386, w/ dfhack
@@ -20,6 +22,16 @@ Currently supported versions are;
 - 0.44.07 i386 & x86\_64, w/ dfhack
 - 0.44.09 i386 & x86\_64, w/ dfhack
 
+
+#### Compilation Requirements
+
+Version 0.9.2 or later of flatpak is needed in order to successfully build the Flatpak.
+
+Run `flatpak --version` to determine what you currently use. 
+
+If your distribution does not provide a suitable version, a third party repository may be needed to install an appropriate version. Consult the recommended [setup instructions](https://flatpak.org/setup/) for more info.
+
+#### Build Overview
 To build and install/run the application locally you can do the following;
 ```
 # Available options;
