@@ -20,16 +20,22 @@ If a file named .dfhackrc exists in df_linux, then it will be sourced before set
 Options:
  -d   Runs plain Dwarf Fortress
  -h   Runs dfhack, creating an init file if one doesn't already exist
+ -t   Run dfhack with TWBT
 EOF
 }
 
-while getopts ":hsdR" opt; do
+while getopts ":hsdtR" opt; do
     case $opt in
+        t)
+            DFHACK="true"
+            TWBT="true"
+            ;;
         h)
             DFHACK="true"
             ;;
         d)
             DFHACK="false"
+            TWBT="false"
             ;;
         \?)
             echo "Unknown option -$OPTARG"
@@ -45,6 +51,11 @@ if [ ! -d /app/dfhack/hack ]; then
     DFHACK="false"
 fi
 
+if [ ! -d /app/twbt/hack ]; then
+    [ "$TWBT" = "true" ] && ( echo "This version of com.bay12games.DwarfFortress does not come with TWBT support. Sorry."; exit 1; )
+    TWBT="false"
+fi
+
 DIRS=( data raw )
 HACKDIRS=( )
 FILES=( '*.txt' README.linux )
@@ -57,7 +68,8 @@ if [ "$DFHACK" = "true" ] && [ ! -t 0 ] && [ ! -t 1 ]; then
     echo "Trying to run dfhack outside of terminal, this won't work at the moment."
     DFHACK="false"
 fi
-[ "$DFHACK" = "true" ] && HACKDIRS+=( hack dfhack-config stonesense )
+[ "$DFHACK" = "true" ] && HACKDIRS+=( dfhack/hack dfhack/dfhack-config dfhack/stonesense )
+[ "$TWBT" = "true" ] && HACKDIRS+=( twbt/hack twbt/data )
 
 for DIR in "${DIRS[@]}"; do
     if [ ! -e "$DIR/.skip" ]; then
@@ -66,7 +78,7 @@ for DIR in "${DIRS[@]}"; do
 done
 for DIR in "${HACKDIRS[@]}"; do
     if [ ! -e "$DIR/.skip" ]; then
-        cp -nr "/app/dfhack/$DIR" .
+        cp -nr "/app/$DIR" .
     fi
 done
 for PATTERN in "${FILES[@]}"; do
@@ -98,6 +110,10 @@ if [ "$DFHACK" = "true" ] || [ -f dfhack.init ] && [ "$DFHACK" != "false" ]; the
 
     export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/app/dfhack/hack/libs:/app/dfhack/hack"
     export LD_PRELOAD="${PRELOAD_LIB:+/app/$PRELOAD_LIB:}/app/dfhack/hack/libdfhack.so"
+fi
+
+if [ "$TWBT" = "true" ]; then
+  sed -i 's;PRINT_MODE:2D;PRINT_MODE:TWBT;g' data/init/init.txt
 fi
 
 RC='.dfrc'

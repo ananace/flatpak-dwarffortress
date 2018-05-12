@@ -1,0 +1,21 @@
+{
+    "name": "twbt",
+    "no-autogen": true,
+    "sources": [
+        {
+            "type": "archive",
+            "url": "https://github.com/mifki/df-twbt/releases/download/v6.41/twbt-6.41-linux.zip",
+            "sha256": "84c04ecf248d915807dc8341aa145055d8b0920a1a77c1b7c470dd027e09585b",
+            "strip-components": 0
+        },
+        {
+            "type": "file",
+            "path": "com.bay12games.DwarfFortress.dfhack.desktop"
+        },
+        {
+            "type": "file",
+            "path": "hack-Makefile",
+            "dest-filename": "Makefile"
+        }
+    ]
+}
